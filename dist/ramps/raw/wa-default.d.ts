@@ -1,0 +1,133 @@
+export declare const waDefaultColors: {
+    red: {
+        '95': string;
+        '90': string;
+        '80': string;
+        '70': string;
+        '60': string;
+        '50': string;
+        '40': string;
+        '30': string;
+        '20': string;
+        '10': string;
+        '05': string;
+    };
+    orange: {
+        '95': string;
+        '90': string;
+        '80': string;
+        '70': string;
+        '60': string;
+        '50': string;
+        '40': string;
+        '30': string;
+        '20': string;
+        '10': string;
+        '05': string;
+    };
+    yellow: {
+        '95': string;
+        '90': string;
+        '80': string;
+        '70': string;
+        '60': string;
+        '50': string;
+        '40': string;
+        '30': string;
+        '20': string;
+        '10': string;
+        '05': string;
+    };
+    green: {
+        '95': string;
+        '90': string;
+        '80': string;
+        '70': string;
+        '60': string;
+        '50': string;
+        '40': string;
+        '30': string;
+        '20': string;
+        '10': string;
+        '05': string;
+    };
+    cyan: {
+        '95': string;
+        '90': string;
+        '80': string;
+        '70': string;
+        '60': string;
+        '50': string;
+        '40': string;
+        '30': string;
+        '20': string;
+        '10': string;
+        '05': string;
+    };
+    blue: {
+        '95': string;
+        '90': string;
+        '80': string;
+        '70': string;
+        '60': string;
+        '50': string;
+        '40': string;
+        '30': string;
+        '20': string;
+        '10': string;
+        '05': string;
+    };
+    indigo: {
+        '95': string;
+        '90': string;
+        '80': string;
+        '70': string;
+        '60': string;
+        '50': string;
+        '40': string;
+        '30': string;
+        '20': string;
+        '10': string;
+        '05': string;
+    };
+    purple: {
+        '95': string;
+        '90': string;
+        '80': string;
+        '70': string;
+        '60': string;
+        '50': string;
+        '40': string;
+        '30': string;
+        '20': string;
+        '10': string;
+        '05': string;
+    };
+    pink: {
+        '95': string;
+        '90': string;
+        '80': string;
+        '70': string;
+        '60': string;
+        '50': string;
+        '40': string;
+        '30': string;
+        '20': string;
+        '10': string;
+        '05': string;
+    };
+    gray: {
+        '95': string;
+        '90': string;
+        '80': string;
+        '70': string;
+        '60': string;
+        '50': string;
+        '40': string;
+        '30': string;
+        '20': string;
+        '10': string;
+        '05': string;
+    };
+};
+//# sourceMappingURL=wa-default.d.ts.map
