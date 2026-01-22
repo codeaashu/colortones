@@ -26,12 +26,12 @@ import { radixRamps } from 'colortones/ramps/radix';
 import { formatCss, formatHex } from 'culori';
 
 // Use Tailwind ramps (shades: 50-950)
-const color = new ColorTones({ ramps: tailwindRamps });
+const ditto = new ColorTones({ ramps: tailwindRamps });
 
 // Or Radix ramps (shades: 1-12)
-const colorRadix = new ColorTones({ ramps: radixRamps });
+const dittoRadix = new ColorTones({ ramps: radixRamps });
 
-const result = color.generate('#F97316');
+const result = ditto.generate('#F97316');
 
 // result.scale contains Oklch color objects
 // Use culori's formatCss or formatHex to convert:
@@ -93,7 +93,7 @@ const customRamps = new Map([
   ],
 ]);
 
-const color = new ColorTones({ ramps: customRamps });
+const ditto = new ColorTones({ ramps: customRamps });
 ```
 
 ## Dev
