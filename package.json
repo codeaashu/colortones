@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "description": "Transform any color into a full palette by copying the perceptual DNA of Tailwind, Radix, and other design systems",
   "keywords": [
-    "NPM",
     "color",
     "colour",
     "palette",
@@ -17,7 +16,8 @@
     "themable",
     "css",
     "frontend",
-    "ui"
+    "ui",
+    "npm"
   ],
   "homepage": "https://github.com/codeaashu/colortones#readme",
   "bugs": {
