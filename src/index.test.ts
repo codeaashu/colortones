@@ -51,17 +51,17 @@ describe('ColorTones', () => {
     ]);
   };
 
-  let ditto: ColorTones;
+  let color: ColorTones;
 
   beforeEach(() => {
-    ditto = new ColorTones({ ramps: createTestRamps() });
+    color = new ColorTones({ ramps: createTestRamps() });
   });
 
   describe('Constructor', () => {
     it('should create instance with valid ramps', () => {
-      expect(ditto).toBeInstanceOf(ColorTones);
-      expect(ditto.rampNames).toEqual(['blue', 'red', 'gray']);
-      expect(ditto.shades).toEqual([
+      expect(color).toBeInstanceOf(ColorTones);
+      expect(color.rampNames).toEqual(['blue', 'red', 'gray']);
+      expect(color.shades).toEqual([
         '50',
         '100',
         '200',
@@ -107,7 +107,7 @@ describe('ColorTones', () => {
 
   describe('generate()', () => {
     it('should generate palette from a valid color string', () => {
-      const result = ditto.generate('#3b82f6');
+      const result = color.generate('#3b82f6');
 
       expect(result).toHaveProperty('inputColor');
       expect(result).toHaveProperty('matchedShade');
@@ -117,33 +117,33 @@ describe('ColorTones', () => {
 
       expect(result.inputColor.mode).toBe('oklch');
       expect(result.method).toMatch(/^(exact|single|blend)$/);
-      expect(Object.keys(result.scale)).toEqual(ditto.shades);
+      expect(Object.keys(result.scale)).toEqual(color.shades);
     });
 
     it('should throw error for invalid color', () => {
       expect(() => {
-        ditto.generate('not-a-color');
+        color.generate('not-a-color');
       }).toThrow('Invalid color');
     });
 
     it('should handle hex colors', () => {
-      const result = ditto.generate('#ff0000');
+      const result = color.generate('#ff0000');
       expect(result.scale).toBeDefined();
       expect(Object.keys(result.scale).length).toBe(10);
     });
 
     it('should handle rgb colors', () => {
-      const result = ditto.generate('rgb(255, 0, 0)');
+      const result = color.generate('rgb(255, 0, 0)');
       expect(result.scale).toBeDefined();
     });
 
     it('should handle hsl colors', () => {
-      const result = ditto.generate('hsl(0, 100%, 50%)');
+      const result = color.generate('hsl(0, 100%, 50%)');
       expect(result.scale).toBeDefined();
     });
 
     it('should handle named colors', () => {
-      const result = ditto.generate('blue');
+      const result = color.generate('blue');
       expect(result.scale).toBeDefined();
     });
   });
@@ -151,7 +151,7 @@ describe('ColorTones', () => {
   describe('Neutral color handling', () => {
     it('should use neutral ramp for low-chroma colors', () => {
       // Create a very low chroma color (gray)
-      const result = ditto.generate('#808080');
+      const result = color.generate('#808080');
 
       expect(result.method).toBe('exact');
       expect(result.sources.length).toBe(1);
@@ -161,7 +161,7 @@ describe('ColorTones', () => {
     it('should preserve hue tint in neutral colors', () => {
       // Create a very low-chroma but non-zero hue color
       const warmGray = 'oklch(0.5 0.01 30)';
-      const result = ditto.generate(warmGray);
+      const result = color.generate(warmGray);
 
       // Check that the generated scale has the same hue
       const scale500 = result.scale['500'];
@@ -173,7 +173,7 @@ describe('ColorTones', () => {
     it('should use exact method for very close color matches', () => {
       // Create a color very similar to blue-500
       const nearExactBlue = 'oklch(0.5 0.2 240)';
-      const result = ditto.generate(nearExactBlue);
+      const result = color.generate(nearExactBlue);
 
       // Should match to exact or single method
       expect(['exact', 'single']).toContain(result.method);
@@ -183,7 +183,7 @@ describe('ColorTones', () => {
       // Create a color between blue (240) and red (30) in hue
       // Use purple/magenta which is between them
       const purpleColor = 'oklch(0.5 0.2 300)';
-      const result = ditto.generate(purpleColor);
+      const result = color.generate(purpleColor);
 
       // Check that we have sources
       expect(result.sources.length).toBeGreaterThan(0);
@@ -192,7 +192,7 @@ describe('ColorTones', () => {
     it('should match correct shade based on lightness', () => {
       // Create a dark blue color
       const darkBlue = 'oklch(0.3 0.12 240)';
-      const result = ditto.generate(darkBlue);
+      const result = color.generate(darkBlue);
 
       // Should match to a darker shade
       expect(result.matchedShade).toMatch(/^(600|700|800|900)$/);
@@ -201,7 +201,7 @@ describe('ColorTones', () => {
     it('should match correct shade for light colors', () => {
       // Create a light blue color
       const lightBlue = 'oklch(0.9 0.04 240)';
-      const result = ditto.generate(lightBlue);
+      const result = color.generate(lightBlue);
 
       // Should match to a lighter shade
       expect(result.matchedShade).toMatch(/^(50|100|200)$/);
@@ -210,15 +210,15 @@ describe('ColorTones', () => {
 
   describe('Scale generation', () => {
     it('should generate scale with all shades', () => {
-      const result = ditto.generate('#3b82f6');
+      const result = color.generate('#3b82f6');
       const scaleKeys = Object.keys(result.scale);
 
-      expect(scaleKeys).toEqual(ditto.shades);
+      expect(scaleKeys).toEqual(color.shades);
     });
 
     it('should preserve input color at matched shade', () => {
       const inputColor = '#3b82f6';
-      const result = ditto.generate(inputColor);
+      const result = color.generate(inputColor);
       const inputOklch = oklch(parse(inputColor)) as Oklch;
 
       // The matched shade should be very close to the input
@@ -228,7 +228,7 @@ describe('ColorTones', () => {
     });
 
     it('should generate valid OKLCH colors in scale', () => {
-      const result = ditto.generate('#ff6b35');
+      const result = color.generate('#ff6b35');
 
       for (const [, color] of Object.entries(result.scale)) {
         expect(color.mode).toBe('oklch');
@@ -240,7 +240,7 @@ describe('ColorTones', () => {
     });
 
     it('should maintain hue consistency across scale', () => {
-      const result = ditto.generate('#ff6b35');
+      const result = color.generate('#ff6b35');
       const inputHue = result.inputColor.h ?? 0;
 
       // All colors in scale should have similar hue
@@ -250,8 +250,8 @@ describe('ColorTones', () => {
     });
 
     it('should have progressive lightness values', () => {
-      const result = ditto.generate('#3b82f6');
-      const lightnesses = ditto.shades.map((shade) => result.scale[shade].l);
+      const result = color.generate('#3b82f6');
+      const lightnesses = color.shades.map((shade) => result.scale[shade].l);
 
       // Check that lightness generally decreases from 50 to 900
       expect(lightnesses[0]).toBeGreaterThan(lightnesses[lightnesses.length - 1]);
@@ -269,7 +269,7 @@ describe('ColorTones', () => {
 
   describe('Source tracking', () => {
     it('should track single source for simple matches', () => {
-      const result = ditto.generate('#0000ff');
+      const result = color.generate('#0000ff');
 
       if (result.method === 'single' || result.method === 'exact') {
         expect(result.sources.length).toBe(1);
@@ -278,7 +278,7 @@ describe('ColorTones', () => {
     });
 
     it('should track multiple sources for blended matches', () => {
-      const result = ditto.generate('oklch(0.5 0.2 300)');
+      const result = color.generate('oklch(0.5 0.2 300)');
 
       if (result.method === 'blend') {
         expect(result.sources.length).toBe(2);
@@ -294,7 +294,7 @@ describe('ColorTones', () => {
     });
 
     it('should include diff values in sources', () => {
-      const result = ditto.generate('#3b82f6');
+      const result = color.generate('#3b82f6');
 
       for (const source of result.sources) {
         expect(source).toHaveProperty('name');
@@ -307,12 +307,12 @@ describe('ColorTones', () => {
 
   describe('Getters', () => {
     it('should return ramp names', () => {
-      const names = ditto.rampNames;
+      const names = color.rampNames;
       expect(names).toEqual(['blue', 'red', 'gray']);
     });
 
     it('should return shade keys', () => {
-      const shades = ditto.shades;
+      const shades = color.shades;
       expect(shades).toEqual(['50', '100', '200', '300', '400', '500', '600', '700', '800', '900']);
     });
   });
@@ -325,14 +325,14 @@ describe('ColorTones', () => {
         '9': { mode: 'oklch', l: 0.05, c: 0.02, h: 240 }, // Black-ish
       };
 
-      const customDitto = new ColorTones({
+      const customcolor = new ColorTones({
         ramps: new Map([['custom', customRamp]]),
       });
 
       // Match shade '5' (L=0.5) with a darker color (L=0.3)
       // We ensure it matches '5' by keeping C=0.2.
       const input = 'oklch(0.3 0.2 240)';
-      const res = customDitto.generate(input);
+      const res = customcolor.generate(input);
 
       expect(res.matchedShade).toBe('5');
       expect(res.scale['5'].l).toBeCloseTo(0.3, 4);
@@ -354,7 +354,7 @@ describe('ColorTones', () => {
         '5': { mode: 'oklch', l: 0.5, c: 0.2, h: 240 },
       };
 
-      const customDitto = new ColorTones({
+      const customcolor = new ColorTones({
         ramps: new Map([['custom', customRamp]]),
       });
 
@@ -363,7 +363,7 @@ describe('ColorTones', () => {
       // '1' would become 1.0. '2' would become 1.05 (clamped to 1).
       // They would lose distinction.
       const input = 'oklch(0.6 0.2 240)';
-      const res = customDitto.generate(input);
+      const res = customcolor.generate(input);
 
       expect(res.matchedShade).toBe('5');
 
@@ -388,7 +388,7 @@ describe('ColorTones', () => {
 
   describe('Edge cases', () => {
     it('should handle pure black', () => {
-      const result = ditto.generate('#000000');
+      const result = color.generate('#000000');
       expect(result.scale).toBeDefined();
       expect(Object.keys(result.scale).length).toBe(10);
       // If matched shade is black, all darker shades should be black.
@@ -403,18 +403,18 @@ describe('ColorTones', () => {
     });
 
     it('should handle pure white', () => {
-      const result = ditto.generate('#ffffff');
+      const result = color.generate('#ffffff');
       expect(result.scale).toBeDefined();
     });
 
     it('should handle colors with extreme chroma', () => {
       // Very saturated color
-      const result = ditto.generate('oklch(0.5 0.4 120)');
+      const result = color.generate('oklch(0.5 0.4 120)');
       expect(result.scale).toBeDefined();
     });
 
     it('should handle colors with zero chroma', () => {
-      const result = ditto.generate('oklch(0.5 0 0)');
+      const result = color.generate('oklch(0.5 0 0)');
       expect(result.method).toBe('exact');
       expect(result.sources[0].name).toBe('gray');
     });
@@ -423,7 +423,7 @@ describe('ColorTones', () => {
       // Using a high chroma red similar to the issue report
       // oklch(0.619 0.25 28.1)
       const inputColor = 'oklch(0.6191564705137876 0.2504590219988421 28.136255553835348)';
-      const result = ditto.generate(inputColor);
+      const result = color.generate(inputColor);
 
       // The matched shade should be exact
       const matchedColor = result.scale[result.matchedShade];

@@ -14,7 +14,7 @@ type ColorFormat = 'oklch' | 'oklab' | 'hex';
 
 let currentRampSet: RampSet = 'tailwind';
 let currentFormat: ColorFormat = 'oklch';
-let ditto = new ColorTones({ ramps: tailwindRamps });
+let color = new ColorTones({ ramps: tailwindRamps });
 
 const colorPicker = document.getElementById('colorPicker') as HTMLInputElement;
 const hexInput = document.getElementById('hexInput') as HTMLInputElement;
@@ -208,7 +208,7 @@ function formatColor(color: Oklch, format: ColorFormat): string {
 }
 
 function toCSS(
-  result: ReturnType<typeof ditto.generate>,
+  result: ReturnType<typeof color.generate>,
   name = 'color',
   format: ColorFormat = 'oklch'
 ) {
@@ -248,7 +248,7 @@ function getPaletteNameFromTitle(title: string | null | undefined): string {
   return raw;
 }
 
-function renderBlendViz(result: ReturnType<typeof ditto.generate>) {
+function renderBlendViz(result: ReturnType<typeof color.generate>) {
   blendViz.innerHTML = '';
   const shades = getShades();
 
@@ -327,9 +327,9 @@ function sanitizeName(name: string): string {
 }
 
 let nameFetchTimeout: any;
-let lastResult: ReturnType<typeof ditto.generate> | null = null;
+let lastResult: ReturnType<typeof color.generate> | null = null;
 
-async function fetchAndApplyName(result: ReturnType<typeof ditto.generate>) {
+async function fetchAndApplyName(result: ReturnType<typeof color.generate>) {
   try {
     const shades = getShades();
     const middleShade = shades[Math.floor((shades.length - 1) / 2)];
@@ -358,7 +358,7 @@ async function fetchAndApplyName(result: ReturnType<typeof ditto.generate>) {
 
 function updatePalette(color: string) {
   try {
-    const result = ditto.generate(color);
+    const result = color.generate(color);
     lastResult = result;
     const shades = getShades();
 
@@ -436,7 +436,7 @@ hexInput.addEventListener('input', (e) => {
 
 rampSelector.addEventListener('change', (e) => {
   currentRampSet = (e.target as HTMLSelectElement).value as RampSet;
-  ditto = new ColorTones({ ramps: getCurrentRamps() });
+  color = new ColorTones({ ramps: getCurrentRamps() });
   updatePalette(colorPicker.value);
 });
 
