@@ -1,5 +1,8 @@
 {
-  "name": "colortones",
+  "name": "@codeaashu/colortones",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "version": "0.1.0",
   "description": "Transform any color into a full palette by copying the perceptual DNA of Tailwind, Radix, and other design systems",
   "keywords": [
