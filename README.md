@@ -4,7 +4,7 @@ A mini-library to transform any color into a full palette, based on the perceptu
 
 ![colortones.png](colortones.png)
 
-Demo: https://meodai.github.io/colorTones/
+Demo: https://colortonesx.vercel.app/
 
 ## How it works
 

@@ -1,732 +1,788 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>colortones</title>
-    <meta
-      name="description"
-      content="A mini-library to transform any color into a full palette, based on the perceptual 'DNA' of any design system."
-    />
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://colortonesx.vercel.app/" />
-    <meta property="og:title" content="colortones" />
-    <meta property="og:image" content="https://colortonesx.vercel.app/opengraph.png" />
-    <meta property="og:image:alt" content="colortones" />
-    <meta
-      property="og:description"
-      content="A mini-library to transform any color into a full palette, based on the perceptual 'DNA' of any design system."
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>colortones</title>
+  <meta name="description"
+    content="A mini-library to transform any color into a full palette, based on the perceptual 'DNA' of any design system." />
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://colortonesx.vercel.app/" />
-    <meta property="twitter:title" content="colortones" />
-    <meta property="twitter:image" content="https://colortonesx.vercel.app/opengraph.png" />
-    <meta property="twitter:image:alt" content="colortones" />
-    <meta
-      property="twitter:description"
-      content="A mini-library to transform any color into a full palette, based on the perceptual 'DNA' of any design system."
-    />
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://colortonesx.vercel.app/" />
+  <meta property="og:title" content="colortones" />
+  <meta property="og:image" content="https://colortonesx.vercel.app/opengraph.png" />
+  <meta property="og:image:alt" content="colortones" />
+  <meta property="og:description"
+    content="A mini-library to transform any color into a full palette, based on the perceptual 'DNA' of any design system." />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@8..144,100..1000&family=Xanh+Mono&display=swap"
-    />
-    <style>
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://colortonesx.vercel.app/" />
+  <meta property="twitter:title" content="colortones" />
+  <meta property="twitter:image" content="https://colortonesx.vercel.app/opengraph.png" />
+  <meta property="twitter:image:alt" content="colortones" />
+  <meta property="twitter:description"
+    content="A mini-library to transform any color into a full palette, based on the perceptual 'DNA' of any design system." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@8..144,100..1000&family=Xanh+Mono&display=swap" />
+  <style>
+    :root {
+      --font-ui: 'Google Sans Flex', system-ui, -apple-system, sans-serif;
+      --font-input: 'Xanh Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      --font-ui: 'Xanh Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-weight: 400;
+
+      --c-purple: #a855f7;
+      --c-black: #202126;
+      --c-grey: #a1a1a1;
+      --c-white: #f4f4f8;
+      --c-red: tomato;
+      --c-green: rgb(67, 164, 133);
+
+      --c-text: var(--c-grey);
+      --c-text-alt: var(--c-white);
+      --c-bg: var(--c-black);
+      --c-hightlight: var(--c-purple);
+      --c-interactive: var(--c-white);
+
+      --s-inset: 8rem;
+      line-height: 1.5;
+
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    :root,
+    html,
+    body {
+      overflow-x: clip;
+    }
+
+    @media (prefers-color-scheme: light) {
       :root {
-        --font-ui: 'Google Sans Flex', system-ui, -apple-system, sans-serif;
-        --font-input: 'Xanh Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-        --font-ui: 'Xanh Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-        font-weight: 400;
-
-        --c-purple: #a855f7;
-        --c-black: #202126;
-        --c-grey: #a1a1a1;
-        --c-white: #f4f4f8;
-        --c-red: tomato;
-        --c-green: rgb(67, 164, 133);
-
-        --c-text: var(--c-grey);
-        --c-text-alt: var(--c-white);
-        --c-bg: var(--c-black);
-        --c-hightlight: var(--c-purple);
-        --c-interactive: var(--c-white);
-
-        --s-inset: 8rem;
-        line-height: 1.5;
-
-        text-rendering: optimizeLegibility;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+        --c-text-alt: #111111;
+        --c-bg: #fafafa;
+        --c-interactive: #111111;
       }
+    }
 
-      :root, html, body {
-        overflow-x: clip;
+    @media (max-width: 700px) {
+      :root {
+        --s-inset: max(2rem, 10vw);
       }
+    }
 
-      @media (prefers-color-scheme: light) {
-        :root {
-          --c-text-alt: #111111;
-          --c-bg: #fafafa;
-          --c-interactive: #111111;
-        }
-      }
+    a,
+    button,
+    select,
+    input {
+      color: var(--c-interactive);
+      border-radius: 2px;
+    }
 
-      @media (max-width: 700px) {
-        :root {
-          --s-inset: max(2rem, 10vw);
-        }
-      }
+    a {
+      color: var(--c-text-alt);
+      text-decoration: underline;
+      text-decoration-color: var(--c-hightlight);
+      text-underline-offset: 2px;
+      text-decoration-thickness: 1px;
+    }
 
-      a,
-      button,
-      select,
-      input {
-        color: var(--c-interactive);
-        border-radius: 2px;
-      }
+    a:hover {
+      color: var(--c-hightlight);
+    }
 
-      a {
-        color: var(--c-text-alt);
-        text-decoration: underline;
-        text-decoration-color: var(--c-hightlight);
-        text-underline-offset: 2px;
-        text-decoration-thickness: 1px;
-      }
-      a:hover {
-        color: var(--c-hightlight);
-      }
+    ::selection {
+      background: var(--c-purple);
+      color: var(--c-white);
+    }
 
-      ::selection {
-        background: var(--c-purple);
-        color: var(--c-white);
-      }
+    * {
+      margin: 0;
+      padding: 0;
+    }
 
-      * {
-        margin: 0;
-        padding: 0;
-      }
+    input,
+    select,
+    button,
+    textarea {
+      font: inherit;
+      font-family: var(--font-input);
+    }
 
-      input,
-      select,
-      button,
-      textarea {
-        font: inherit;
-        font-family: var(--font-input);
-      }
+    pre,
+    code,
+    kbd,
+    samp {
+      font-family: inherit;
+    }
 
-      pre,
-      code,
-      kbd,
-      samp {
-        font-family: inherit;
-      }
+    body {
+      font-family: var(--font-ui);
+      background: var(--c-bg);
+      color: var(--c-text);
+      padding: max(15vmin, 2rem);
+    }
 
+
+    @media (max-width: 700px) {
       body {
-        font-family: var(--font-ui);
-        background: var(--c-bg);
-        color: var(--c-text);
-        padding: max(15vmin, 2rem);
+        padding: max(10vmin, 1rem);
       }
+    }
 
+    svg {
+      display: block;
+      overflow: visible;
+    }
 
-      @media (max-width: 700px) {
-        body {
-          padding: max(10vmin, 1rem);
-        }
-      }
+    .container {
+      max-width: 55rem;
+      margin: 0 auto;
+    }
 
-      svg {
-        display: block;
-        overflow: visible;
-      }
+    h1 {
+      font-size: 5rem;
+      margin-bottom: 0.5rem;
+      color: var(--c-hightlight);
+      letter-spacing: -0.1em;
 
-      .container {
-        max-width: 55rem;
-        margin: 0 auto;
-      }
+      user-select: none;
+    }
 
+    @media (max-width: 600px) {
       h1 {
-        font-size: 5rem;
-        margin-bottom: 0.5rem;
-        color: var(--c-hightlight);
-        letter-spacing: -0.1em;
-
-        user-select: none;
+        font-size: 2.5rem;
       }
-      @media (max-width: 600px) {
-        h1 {
-          font-size: 2.5rem;
-        }
-      }
-      h2 {
-        color: var(--c-text-alt);
-        letter-spacing: -0.025em;
-      }
-      h1,
-      h2 {
-        position: relative;
+    }
 
-        &::after {
-          height: 0.5px;
-          content: '';
-          position: absolute;
-          bottom: -0.75rem;
-          width: 200vw;
-          background: var(--c-text);
-          left: 50%;
-          transform: translateX(-50%);
-          opacity: 0.5;
-        }
+    h2 {
+      color: var(--c-text-alt);
+      letter-spacing: -0.025em;
+    }
+
+    h1,
+    h2 {
+      position: relative;
+
+      &::after {
+        height: 0.5px;
+        content: '';
+        position: absolute;
+        bottom: -0.75rem;
+        width: 200vw;
+        background: var(--c-text);
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0.5;
       }
-      .container {
-        position: relative;
-        &::after,
-        &::before {
-          content: '';
-          position: absolute;
+    }
 
-          width: 0.5px;
-          top: calc(-1 * max(15vmin, 2rem));
-          bottom: calc(-1 * max(15vmin, 2rem));
-          opacity: 0.5;
-          background: var(--c-text);
-        }
+    .container {
+      position: relative;
 
-        &::after {
-          right: -3rem;
-        }
-        &::before {
-          left: -3rem;
-        }
+      &::after,
+      &::before {
+        content: '';
+        position: absolute;
+
+        width: 0.5px;
+        top: calc(-1 * max(15vmin, 2rem));
+        bottom: calc(-1 * max(15vmin, 2rem));
+        opacity: 0.5;
+        background: var(--c-text);
       }
 
-      @media (max-width: 700px) {
-        .container::after {
-          right: -1rem;
-        }
-        .container::before {
-          left: -1rem;
-        }
-      }
-      .subtitle {
-        margin-bottom: 2rem;
-        max-width: 55ch;
-        line-height: 1.5;
-        margin-top: 2em;
-
-        margin-left: var(--s-inset);
+      &::after {
+        right: -3rem;
       }
 
-      .section--picker {
-        position: sticky;
-        top: -1px;
-        margin-bottom: 1.5rem;
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-        flex-wrap: wrap;
-        border-top: 0.5px solid color-mix(in srgb, var(--c-text) 50%, transparent);
-        border-bottom: 0.5px solid color-mix(in srgb, var(--c-text) 50%, transparent);
-        padding: 1.5rem 3rem;
-        margin-left: -3rem;
-        margin-right: -3rem;
-        box-sizing: border-box;
-        background-image: radial-gradient(
-          circle at 50% 50%,
+      &::before {
+        left: -3rem;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .container::after {
+        right: -1rem;
+      }
+
+      .container::before {
+        left: -1rem;
+      }
+    }
+
+    .subtitle {
+      margin-bottom: 2rem;
+      max-width: 55ch;
+      line-height: 1.5;
+      margin-top: 2em;
+
+      margin-left: var(--s-inset);
+    }
+
+    .section--picker {
+      position: sticky;
+      top: -1px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      border-top: 0.5px solid color-mix(in srgb, var(--c-text) 50%, transparent);
+      border-bottom: 0.5px solid color-mix(in srgb, var(--c-text) 50%, transparent);
+      padding: 1.5rem 3rem;
+      margin-left: -3rem;
+      margin-right: -3rem;
+      box-sizing: border-box;
+      background-image: radial-gradient(circle at 50% 50%,
           transparent 0% 35%,
-          var(--c-bg) 35% 100%
-        );
-        background-repeat: repeat;
-        background-size: 3px 3px;
-        z-index: 1000;
-      }
-      .color-input-wrapper {
-        display: flex;
-        align-items: center;
-      }
-      input[type='color'] {
-        width: 55px;
-        height: 55px;
-        border: none;
-        cursor: pointer;
-        background: transparent;
-        margin-right: -1px;
-        border-radius: 2px;
-      }
-      input[type='color']::-webkit-color-swatch-wrapper {
-        padding: 0;
-      }
-      input[type='color']::-webkit-color-swatch {
-        border: none;
-      }
-      .hex-input {
-        background: #27272a;
-        border: 1px solid #3f3f46;
-        padding: 0.75rem 1rem;
-        color: #fafafa;
-        font-size: 1.25rem;
-        width: 140px;
-        text-transform: uppercase;
-      }
-      .hex-input:focus {
-        outline: none;
-        border-color: #a855f7;
-      }
+          var(--c-bg) 35% 100%);
+      background-repeat: repeat;
+      background-size: 3px 3px;
+      z-index: 1000;
+    }
 
-      .info-section {
-        flex: 1;
-        min-width: 200px;
-      }
-      .method-badge {
-        display: inline-block;
-        padding: 0.25rem 0.75rem;
-        border-radius: 9999px;
-        font-size: 0.65rem;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        margin-bottom: 0.45rem;
-      }
-      .method-exact {
-        background: var(--c-green);
-        color: var(--c-black);
-      }
-      .method-single {
-        background: #1e40af;
-        color: #bfdbfe;
-      }
-      .method-blend {
-        background: var(--c-hightlight);
-        color: var(--c-white);
-      }
-      .ramp-info {
-        font-size: 0.9rem;
-      }
-      .ramp-name {
-        color: var(--c-text-alt);
-      }
-      .ramp-weight {
-        color: #a855f7;
-        font-family: var(--font-input);
-      }
-      .ramp-selector {
-        background: #27272a;
-        border: 1px solid #3f3f46;
-        padding: 0.5rem 1rem;
-        color: var(--c-white);
-        font-size: 0.9rem;
-        cursor: pointer;
-      }
-      .ramp-selector:focus {
-        outline: none;
-        border-color: var(--c-hightlight);
-      }
+    .color-input-wrapper {
+      display: flex;
+      align-items: center;
+    }
 
-      .blend-section {
-        margin-top: 4rem;
-      }
-      .section__tools {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        margin-top: -1.5rem;
-      }
-      .section__title {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-      }
-      .blend-viz {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-        margin-top: 2rem;
-      }
+    input[type='color'] {
+      width: 55px;
+      height: 55px;
+      border: none;
+      cursor: pointer;
+      background: transparent;
+      margin-right: -1px;
+      border-radius: 2px;
+    }
+
+    input[type='color']::-webkit-color-swatch-wrapper {
+      padding: 0;
+    }
+
+    input[type='color']::-webkit-color-swatch {
+      border: none;
+    }
+
+    .hex-input {
+      background: #27272a;
+      border: 1px solid #3f3f46;
+      padding: 0.75rem 1rem;
+      color: #fafafa;
+      font-size: 1.25rem;
+      width: 140px;
+      text-transform: uppercase;
+    }
+
+    .hex-input:focus {
+      outline: none;
+      border-color: #a855f7;
+    }
+
+    .info-section {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .method-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.45rem;
+    }
+
+    .method-exact {
+      background: var(--c-green);
+      color: var(--c-black);
+    }
+
+    .method-single {
+      background: #1e40af;
+      color: #bfdbfe;
+    }
+
+    .method-blend {
+      background: var(--c-hightlight);
+      color: var(--c-white);
+    }
+
+    .ramp-info {
+      font-size: 0.9rem;
+    }
+
+    .ramp-name {
+      color: var(--c-text-alt);
+    }
+
+    .ramp-weight {
+      color: #a855f7;
+      font-family: var(--font-input);
+    }
+
+    .ramp-selector {
+      background: #27272a;
+      border: 1px solid #3f3f46;
+      padding: 0.5rem 1rem;
+      color: var(--c-white);
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .ramp-selector:focus {
+      outline: none;
+      border-color: var(--c-hightlight);
+    }
+
+    .blend-section {
+      margin-top: 4rem;
+    }
+
+    .section__tools {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: -1.5rem;
+    }
+
+    .section__title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .blend-viz {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 2rem;
+    }
+
+    .ramp-row {
+      display: flex;
+      align-items: center;
+      min-height: 2.5rem;
+    }
+
+    @media (max-width: 600px) {
       .ramp-row {
-        display: flex;
-        align-items: center;
-        min-height: 2.5rem;
-      }
-
-      @media (max-width: 600px) {
-        .ramp-row {
-          flex-direction: column;
-          align-items: stretch;
-          gap: 0.5rem;
-          font-size: 0.9rem;
-        }
-      }
-      .ramp-label {
-        width: var(--s-inset);
-        font-size: 0.85rem;
-        text-align: right;
-        flex-shrink: 0;
-        padding-right: 1rem;
-        box-sizing: border-box;
-        line-height: 1.2;
-      }
-
-      @media (max-width: 600px) {
-        .ramp-label {
-          width: 100%;
-          text-align: left;
-          padding-right: 0;
-          display: flex;
-          justify-content: space-between;
-        }
-      }
-      .ramp-label .weight {
-        color: var(--c-hightlight);
-        font-size: 0.8rem;
-        font-family: var(--font-input);
-      }
-      .ramp-bar {
-        flex: 1;
-        height: 2rem;
-        display: flex;
-      }
-      .shade-block {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
         font-size: 0.9rem;
-        line-height: 1;
-        background: var(--cc);
       }
-      .shade-block.matched {
-        z-index: 1;
-        transform: scale(1.1);
-      }
-      .blend-palette-row {
-        min-height: 2rem;
-      }
-      .blend-palette-bar {
-        height: auto;
-      }
-      .blend-palette-bar .shade {
-        flex: 1;
-        padding-top: 3.25rem;
-        height: 2rem;
-      }
+    }
 
-      .section {
-        margin-top: 5rem;
-      }
-      .palette-header {
+    .ramp-label {
+      width: var(--s-inset);
+      font-size: 0.85rem;
+      text-align: right;
+      flex-shrink: 0;
+      padding-right: 1rem;
+      box-sizing: border-box;
+      line-height: 1.2;
+    }
+
+    @media (max-width: 600px) {
+      .ramp-label {
+        width: 100%;
+        text-align: left;
+        padding-right: 0;
         display: flex;
         justify-content: space-between;
-        align-items: center;
-        margin-bottom: 2rem;
       }
-      .copy-btn {
-        background: #27272a;
-        border: 1px solid #3f3f46;
-        padding: 0.42rem 1rem;
-        color: #a1a1aa;
-        cursor: pointer;
-        font-size: 0.875rem;
-      }
-      .copy-btn:hover {
-        background: #3f3f46;
-        color: #fafafa;
-      }
-      .palette-grid {
-        display: grid;
-        gap: 0.25rem;
+    }
 
-        .shade {
-          position: relative;
-          border: 2px solid var(--c-bg);
-          box-shadow: 0 0 0 0.5px color-mix(in srgb, var(--c-text) 50%, transparent);
+    .ramp-label .weight {
+      color: var(--c-hightlight);
+      font-size: 0.8rem;
+      font-family: var(--font-input);
+    }
 
-          &.matched {
-            box-shadow:
-              0 0 0.5px color-mix(in srgb, var(--c-text) 50%, transparent),
-              0 0 0 3px var(--c-bg),
-              0 0 0 3.5px color-mix(in srgb, var(--c-hightlight) 30%, transparent),
-              0 0 1rem var(--cc);
-          }
-        }
-      }
+    .ramp-bar {
+      flex: 1;
+      height: 2rem;
+      display: flex;
+    }
+
+    .shade-block {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      line-height: 1;
+      background: var(--cc);
+    }
+
+    .shade-block.matched {
+      z-index: 1;
+      transform: scale(1.1);
+    }
+
+    .blend-palette-row {
+      min-height: 2rem;
+    }
+
+    .blend-palette-bar {
+      height: auto;
+    }
+
+    .blend-palette-bar .shade {
+      flex: 1;
+      padding-top: 3.25rem;
+      height: 2rem;
+    }
+
+    .section {
+      margin-top: 5rem;
+    }
+
+    .palette-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .copy-btn {
+      background: #27272a;
+      border: 1px solid #3f3f46;
+      padding: 0.42rem 1rem;
+      color: #a1a1aa;
+      cursor: pointer;
+      font-size: 0.875rem;
+    }
+
+    .copy-btn:hover {
+      background: #3f3f46;
+      color: #fafafa;
+    }
+
+    .palette-grid {
+      display: grid;
+      gap: 0.25rem;
+
       .shade {
-        padding-top: calc(100% + 1.5rem);
-        font-size: 0.7rem;
-        cursor: pointer;
-        transition: transform 0.15s;
         position: relative;
-        background: var(--cc);
-      }
-      .shade__label {
-        background: var(--c-bg);
-        color: var(--c-text-alt);
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        display: flex;
-        flex-direction: column;
-        padding: 0.2rem 2px 0;
-        line-height: 1.1;
-      }
+        border: 2px solid var(--c-bg);
+        box-shadow: 0 0 0 0.5px color-mix(in srgb, var(--c-text) 50%, transparent);
 
-      .shade:hover,
-      .shade.matched {
-        transform: scale(1.1);
-        z-index: 10;
-      }
-      .shade:hover {
-        z-index: 11;
-      }
-      .matched {
-        box-shadow:
-          0 0 0 3px var(--c-bg),
-          0 0 0 3.5px color-mix(in srgb, var(--c-hightlight) 30%, transparent);
-      }
-      .shade-key {
-        display: flex;
-        gap: 0.25rem;
-        align-items: center;
-      }
-      .shade-value {
-        font-size: 0.6rem;
-        opacity: 0.8;
-        font-family: var(--font-input);
-      }
-      .shade.matched .shade-key {
-        &::after {
-          content: '◆';
-          font-size: 0.6em;
+        &.matched {
+          box-shadow:
+            0 0 0.5px color-mix(in srgb, var(--c-text) 50%, transparent),
+            0 0 0 3px var(--c-bg),
+            0 0 0 3.5px color-mix(in srgb, var(--c-hightlight) 30%, transparent),
+            0 0 1rem var(--cc);
         }
       }
-      .css-output {
-        margin-top: 2rem;
-        margin-inline: -3rem;
-        margin-top: -2.25rem;
-        margin-bottom: -2rem;
-        padding: 3rem;
-        padding-bottom: 4.5rem;
-        font-size: 0.8rem;
-        color: var(--c-text-alt);
-        overflow-x: auto;
-        white-space: pre;
-        max-height: 300px;
-        overflow-y: auto;
-        font-family: var(--font-input);
+    }
 
-        border-bottom: 0.5px solid color-mix(in srgb, var(--c-text) 50%, transparent);
+    .shade {
+      padding-top: calc(100% + 1.5rem);
+      font-size: 0.7rem;
+      cursor: pointer;
+      transition: transform 0.15s;
+      position: relative;
+      background: var(--cc);
+    }
 
-        background-image: radial-gradient(
-          circle at 50% 50%,
+    .shade__label {
+      background: var(--c-bg);
+      color: var(--c-text-alt);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      padding: 0.2rem 2px 0;
+      line-height: 1.1;
+    }
+
+    .shade:hover,
+    .shade.matched {
+      transform: scale(1.1);
+      z-index: 10;
+    }
+
+    .shade:hover {
+      z-index: 11;
+    }
+
+    .matched {
+      box-shadow:
+        0 0 0 3px var(--c-bg),
+        0 0 0 3.5px color-mix(in srgb, var(--c-hightlight) 30%, transparent);
+    }
+
+    .shade-key {
+      display: flex;
+      gap: 0.25rem;
+      align-items: center;
+    }
+
+    .shade-value {
+      font-size: 0.6rem;
+      opacity: 0.8;
+      font-family: var(--font-input);
+    }
+
+    .shade.matched .shade-key {
+      &::after {
+        content: '◆';
+        font-size: 0.6em;
+      }
+    }
+
+    .css-output {
+      margin-top: 2rem;
+      margin-inline: -3rem;
+      margin-top: -2.25rem;
+      margin-bottom: -2rem;
+      padding: 3rem;
+      padding-bottom: 4.5rem;
+      font-size: 0.8rem;
+      color: var(--c-text-alt);
+      overflow-x: auto;
+      white-space: pre;
+      max-height: 300px;
+      overflow-y: auto;
+      font-family: var(--font-input);
+
+      border-bottom: 0.5px solid color-mix(in srgb, var(--c-text) 50%, transparent);
+
+      background-image: radial-gradient(circle at 50% 50%,
           color-mix(in srgb, var(--c-text), transparent 75%) 0% 35%,
-          transparent 35% 100%
-        );
-        background-repeat: repeat;
-        background-size: 3px 3px;
-      }
-      .toast {
-        position: fixed;
-        bottom: 2rem;
-        left: 50%;
-        transform: translateX(-50%) translateY(100px);
-        background: #27272a;
-        border: 1px solid #3f3f46;
-        padding: 0.75rem 1.5rem;
-        opacity: 0;
-        transition: all 0.3s;
-        color: #fff;
-        z-index: 999;
-      }
-      .toast.show {
-        transform: translateX(-50%) translateY(0);
-        opacity: 1;
-      }
+          transparent 35% 100%);
+      background-repeat: repeat;
+      background-size: 3px 3px;
+    }
 
-      .logo {
-        display: inline-block;
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #27272a;
+      border: 1px solid #3f3f46;
+      padding: 0.75rem 1.5rem;
+      opacity: 0;
+      transition: all 0.3s;
+      color: #fff;
+      z-index: 999;
+    }
 
-        --x: 0;
-        --y: 0;
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
 
-        height: 1em;
-        aspect-ratio: 1;
-        position: relative;
-        margin-right: 0.35ch;
+    .logo {
+      display: inline-block;
 
-        &::before {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -40%);
-          content: '';
-          width: 120%;
-          height: 120%;
-          border-radius: 50%;
-          background: var(--c-hightlight);
-        }
-      }
-      .logo__face {
+      --x: 0;
+      --y: 0;
+
+      height: 1em;
+      aspect-ratio: 1;
+      position: relative;
+      margin-right: 0.35ch;
+
+      &::before {
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(calc(-45% + (var(--x, 0) * 1em)), calc(-55% + (var(--y, 0) * 1em)));
-        will-change: transform;
-        color: var(--c-text-alt);
-        font-size: 0.3em;
-        white-space: nowrap;
-        letter-spacing: 0;
-        font-family: monospace;
-        font-weight: 300;
+        transform: translate(-50%, -40%);
+        content: '';
+        width: 120%;
+        height: 120%;
+        border-radius: 50%;
+        background: var(--c-hightlight);
       }
-      .description {
-        max-width: 55ch;
-        margin-top: 3em;
-        margin-bottom: 4rem;
-        line-height: 1.5;
-        margin-left: var(--s-inset);
+    }
+
+    .logo__face {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(calc(-45% + (var(--x, 0) * 1em)), calc(-55% + (var(--y, 0) * 1em)));
+      will-change: transform;
+      color: var(--c-text-alt);
+      font-size: 0.3em;
+      white-space: nowrap;
+      letter-spacing: 0;
+      font-family: monospace;
+      font-weight: 300;
+    }
+
+    .description {
+      max-width: 55ch;
+      margin-top: 3em;
+      margin-bottom: 4rem;
+      line-height: 1.5;
+      margin-left: var(--s-inset);
+    }
+
+    .kofi {
+      display: block;
+      width: 3rem;
+      margin-left: calc(var(--s-inset) - 0.5rem);
+
+      img {
+        width: 100%;
       }
-      .kofi {
-        display: block;
-        width: 3rem;
-        margin-left: calc(var(--s-inset) - 0.5rem);
-        img {
-          width: 100%;
-        }
+    }
+
+    @media (max-width: 700px) {
+      .color-input-wrapper {
+        order: 0;
+        width: calc(50% - 0.75rem);
+        flex: 0 0 calc(50% - 0.75rem);
+        display: flex;
       }
 
-      @media (max-width: 700px) {
-        .color-input-wrapper {
-          order: 0;
-          width: calc(50% - 0.75rem);
-          flex: 0 0 calc(50% - 0.75rem);
-          display: flex;
-        }
-        .ramp-selector {
-          order: 1;
-          padding: .44rem .8rem;
-          width: calc(50% - 0.75rem);
-          flex: 0 0 calc(50% - 0.75rem);
-        }
-        .info-section {
-          order: 2;
-          display: flex;
-          gap: 1rem;
-        }
-        .section--picker {
-          padding: 1.5rem 0;
-          margin-left: -1rem;
-          margin-right: -1rem;
-          gap: 1rem;
-        }
-        .hex-input {
-          flex: 0 1 auto;
-          width: 100%;
-          font-size: 1rem;
-          padding: 0.25rem 0.75rem;
-        }
-        input[type='color'] {
-          width: 35px;
-          height: 35px;
-          flex: 0 0 35px;
-        }
-        .method-badge {
-          align-self: center;
-          margin-bottom: 0;
-        }
-        .shade-block {
-          font-size: 0.75rem;
-        }
+      .ramp-selector {
+        order: 1;
+        padding: .44rem .8rem;
+        width: calc(50% - 0.75rem);
+        flex: 0 0 calc(50% - 0.75rem);
       }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1>
-        <span class="logo">
-          <pre class="logo__face" data-face>ꈍᴗꈍ</pre>
-        </span>
-        ColorTones
-      </h1>
-      <p class="subtitle">
-        A mini-library to transform any color into a full color ramp, based on the perceptual "DNA"
-        of any design system. ·
-        <a href="https://github.com/codeaashu/colortones" class="github-link">View on GitHub</a>
-      </p>
 
-      <div class="section section--picker">
-        <div class="color-input-wrapper">
-          <input type="color" id="colorPicker" value="#A855F7" />
-          <input type="text" id="hexInput" class="hex-input" value="#A855F7" />
-        </div>
-        <div class="info-section">
-          <div id="methodBadge" class="method-badge method-blend">blend</div>
-          <div id="rampInfo" class="ramp-info"></div>
-        </div>
-        <select id="rampSelector" class="ramp-selector">
-          <option value="tailwind">Tailwind v4</option>
-          <option value="tailwind-v3">Tailwind v3</option>
-          <option value="radix">Radix 1.1.0</option>
-          <option value="wa-default">Web Awesome Default</option>
-          <option value="wa-bright">Web Awesome Bright</option>
-          <option value="shoelace">Shoelace</option>
-        </select>
+      .info-section {
+        order: 2;
+        display: flex;
+        gap: 1rem;
+      }
+
+      .section--picker {
+        padding: 1.5rem 0;
+        margin-left: -1rem;
+        margin-right: -1rem;
+        gap: 1rem;
+      }
+
+      .hex-input {
+        flex: 0 1 auto;
+        width: 100%;
+        font-size: 1rem;
+        padding: 0.25rem 0.75rem;
+      }
+
+      input[type='color'] {
+        width: 35px;
+        height: 35px;
+        flex: 0 0 35px;
+      }
+
+      .method-badge {
+        align-self: center;
+        margin-bottom: 0;
+      }
+
+      .shade-block {
+        font-size: 0.75rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>
+      <span class="logo">
+        <pre class="logo__face" data-face>ꈍᴗꈍ</pre>
+      </span>
+      ColorTones
+    </h1>
+    <p class="subtitle">
+      A mini-library to transform any color into a full color ramp, based on the perceptual "DNA"
+      of any design system. ·
+      <a href="https://github.com/codeaashu/colortones" class="github-link">View on GitHub</a>
+    </p>
+
+    <div class="section section--picker">
+      <div class="color-input-wrapper">
+        <input type="color" id="colorPicker" value="#A855F7" />
+        <input type="text" id="hexInput" class="hex-input" value="#A855F7" />
       </div>
-
-      <div class="section">
-        <h2 class="section__title">Ramp-Mix</h2>
-        <div id="blendViz" class="blend-viz"></div>
+      <div class="info-section">
+        <div id="methodBadge" class="method-badge method-blend">blend</div>
+        <div id="rampInfo" class="ramp-info"></div>
       </div>
-
-      <div class="section">
-        <div class="palette-header">
-          <h2 class="section__title" id="paletteTitle">Generated Palette</h2>
-          <div class="section__tools">
-            <select id="formatSelector" class="ramp-selector">
-              <option value="oklch">oklch</option>
-              <option value="oklab">oklab</option>
-              <option value="hex">hex</option>
-            </select>
-            <button class="copy-btn" id="copyBtn">Copy CSS</button>
-          </div>
-        </div>
-        <pre class="css-output" id="cssOutput"></pre>
-        <div class="palette-grid" id="paletteGrid"></div>
-      </div>
-
-      <aside class="section">
-        <h2 class="section__title">How it works</h2>
-        <p class="description">
-          Most palette generators for popular frameworks either match a single color or ignore the
-          careful work that was put into creating the original palettes entirely. colorTones
-          analyzes the perceptual "DNA" (Lightness/Chroma curves) of systems like Tailwind or Radix
-          and interpolates your target hue onto them.
-        </p>
-      </aside>
-      <aside class="section">
-        <h2 class="section__title">About</h2>
-        <p class="description">
-          Created by <a href="https://www.devdisplay.org/profile/codeaashu">aashuu</a> ✦ driven by an obsession with design.
-          View the source code on <a href="https://github.com/codeaashu/colortones">GitHub</a>.
-        </p>
-
-        <h2 class="section__title">Support</h2>
-        <p class="description">
-          If you find this project useful, please consider
-          <a href="https://buymeacoffee.com/aashuu" rel="noopener" target="_blank"
-            >buying me an icecream</a
-          >. It keeps my creativity levels high enough to distinguish between #fafafa and #fbfbfb.
-        </p>
-        <a href="https://buymeacoffee.com/aashuu" rel="noopener" target="_blank" class="kofi">
-          <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Telegram-Animated-Emojis/main/Food%20and%20Drink/Soft%20Ice%20Cream.webp" alt="Soft Ice Cream" width="25" height="25" />
-        </a>
-      </aside>
+      <select id="rampSelector" class="ramp-selector">
+        <option value="tailwind">Tailwind v4</option>
+        <option value="tailwind-v3">Tailwind v3</option>
+        <option value="radix">Radix 1.1.0</option>
+        <option value="wa-default">Web Awesome Default</option>
+        <option value="wa-bright">Web Awesome Bright</option>
+        <option value="shoelace">Shoelace</option>
+      </select>
     </div>
 
-    <div class="toast" id="toast">Copied to clipboard!</div>
-    <script type="module" src="/src/demo.ts"></script>
-  </body>
+    <div class="section">
+      <h2 class="section__title">Ramp-Mix</h2>
+      <div id="blendViz" class="blend-viz"></div>
+    </div>
+
+    <div class="section">
+      <div class="palette-header">
+        <h2 class="section__title" id="paletteTitle">Generated Palette</h2>
+        <div class="section__tools">
+          <select id="formatSelector" class="ramp-selector">
+            <option value="oklch">oklch</option>
+            <option value="oklab">oklab</option>
+            <option value="hex">hex</option>
+          </select>
+          <button class="copy-btn" id="copyBtn">Copy CSS</button>
+        </div>
+      </div>
+      <pre class="css-output" id="cssOutput"></pre>
+      <div class="palette-grid" id="paletteGrid"></div>
+    </div>
+
+    <aside class="section">
+      <h2 class="section__title">How it works</h2>
+      <p class="description">
+        Most palette generators for popular frameworks either match a single color or ignore the
+        careful work that was put into creating the original palettes entirely. colorTones
+        analyzes the perceptual "DNA" (Lightness/Chroma curves) of systems like Tailwind or Radix
+        and interpolates your target hue onto them.
+      </p>
+    </aside>
+    <aside class="section">
+      <h2 class="section__title">About</h2>
+      <p class="description">
+        Created by <a href="https://www.devdisplay.org/profile/codeaashu">aashuu</a> ✦ driven by an obsession with
+        design.
+        View the source code on <a href="https://github.com/codeaashu/colortones">GitHub</a>.
+      </p>
+
+      <h2 class="section__title">Support</h2>
+      <p class="description">
+        If you find this project useful, consider
+        <a href="https://buymeacoffee.com/aashuu" rel="noopener" target="_blank">buying me an icecream</a> if you can afford it. It keeps my
+        creativity levels high enough to distinguish between #fafafa and #fbfbfb.
+      </p>
+      <a href="https://buymeacoffee.com/aashuu" rel="noopener" target="_blank" class="kofi">
+        <img
+          src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Telegram-Animated-Emojis/main/Food%20and%20Drink/Soft%20Ice%20Cream.webp"
+          alt="Soft Ice Cream" width="25" height="45" />
+      </a>
+    </aside>
+  </div>
+
+  <div class="toast" id="toast">Copied to clipboard!</div>
+  <script type="module" src="/src/demo.ts"></script>
+</body>
+
 </html>
