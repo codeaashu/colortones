@@ -1,12 +1,8 @@
 # colortones
 
-[![npm version](https://img.shields.io/npm/v/colortones.svg?style=flat-square)](https://www.npmjs.com/package/colortones)
-[![npm downloads](https://img.shields.io/npm/dm/colortones.svg?style=flat-square)](https://www.npmjs.com/package/colortones)
-[![license](https://img.shields.io/npm/l/colortones.svg?style=flat-square)](https://github.com/codeaashu/colortones/blob/main/LICENSE)
-
 A mini-library to transform any color into a full palette, based on the perceptual "DNA" of any design system.
 
-![colortones.png](colortones.png)
+![colortones.png](https://raw.githubusercontent.com/codeaashu/colortones/main/colortones.png)
 
 Demo: https://colortonesx.vercel.app/
 
